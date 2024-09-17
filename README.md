@@ -14,8 +14,8 @@ Seu papel é construir uma RESTful API que permita:
 - ✅ Listar transações
 - ✅ Detalhar transação
 - ✅ Cadastrar transação
-- Editar transação
-- Remover transação
+- ✅ Editar transação
+- ✅ Remover transação
 - Obter extrato de transações
 - [Extra] Filtrar transações por categoria
 
