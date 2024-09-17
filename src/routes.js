@@ -5,7 +5,7 @@ const { registerUser, login, detailUser, editUser } = require('./controllers/use
 const verifyEmailExists = require('./middlewares/verifyUserEmail')
 const { authentication } = require('./middlewares/authentication')
 const { listCategories } = require('./controllers/categories')
-const { listTransactions, detailTransactions, registerTransactions, updateTransactions, deleteTransaction } = require('./controllers/transactions')
+const { listTransactions, detailTransactions, registerTransactions, updateTransactions, deleteTransaction, getTransactionStatement } = require('./controllers/transactions')
 const { requiredFieldsTransaction } = require('./middlewares/verifyFormTransactions')
 const { findCategoryById, findTransactionById } = require('./middlewares/verifyById')
 
@@ -23,6 +23,7 @@ routes.put('/user', requiredFieldsI, editUser)
 routes.get('/category', listCategories)
 routes.get('/transaction', listTransactions)
 
+routes.get('/transaction/extract', getTransactionStatement)
 routes.get('/transaction/:id', detailTransactions)
 routes.post('/transaction', requiredFieldsTransaction, findCategoryById, registerTransactions)
 routes.put('/transaction/:id', requiredFieldsTransaction, findCategoryById, findTransactionById, updateTransactions)

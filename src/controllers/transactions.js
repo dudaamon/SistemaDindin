@@ -95,4 +95,22 @@ const deleteTransaction = async (req, res) => {
     }
 }
 
-module.exports = { listTransactions, detailTransactions, registerTransactions, updateTransactions, deleteTransaction }
+const getTransactionStatement = async (req, res) => {
+    const { id } = req.user
+
+    try {
+        const income = await knex('transactions').sum('amount as TotalIncomes').where({user_id: id, type: 'income' })
+
+        const expense = await knex('transactions').sum('amount as TotalExpenses').where({user_id: id, type: 'expense' })
+
+        const totalExpenses = expense[0].TotalExpenses || 0
+        const totalIncomes = income[0].TotalIncomes || 0
+   
+        return res.status(200).json({totalExpenses: totalExpenses, totalIncomes: totalIncomes})
+    } catch (error) {
+        console.error('Error when obtaining extract:', error)
+        return res.status(500).json({ message: 'Internal Server Error' })
+    }
+}
+
+module.exports = { listTransactions, detailTransactions, registerTransactions, updateTransactions, deleteTransaction, getTransactionStatement }

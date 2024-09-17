@@ -24,7 +24,7 @@ const findTransactionById = async (req, res, next) => {
 
     const transactions = await knex('transactions').where({ id })
     if (!transactions || transactions.length === 0) {
-        return res.status(404).json({ message: 'Transaction not found' });
+        return res.status(404).json({ message: 'Transaction not found' })
     }
     
     next()
